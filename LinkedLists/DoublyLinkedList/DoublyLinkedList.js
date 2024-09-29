@@ -36,7 +36,7 @@ export default class DoublyLinkedList {
     if (preExisting) {
       this.insertAfterNode(new Node(data), preExisting);
     } else {
-      console.log("no node found at the index");
+      console.log("ingen node på indexet");
       return;
     }
   }
@@ -46,7 +46,7 @@ export default class DoublyLinkedList {
     if (preExisting) {
       this.insertBeforeNode(new Node(data), preExisting);
     } else {
-      console.log("no node found at the index");
+      console.log("ingen node på indexet");
       return;
     }
   }
@@ -64,19 +64,26 @@ export default class DoublyLinkedList {
     if (node) {
       this.removeNode(node);
     } else {
-      console.log("no node found with the data");
+      console.log("ingen node på det datasæt");
       return;
     }
   }
 
-  removeIndex(index) {}
+  removeIndex(index) {
+    const node = this.getNode(index);
+    if (node) {
+      this.removeNode(node);
+    } else {
+      console.log("ingen node på indexet");
+    }
+  }
 
   removeFirst() {
     if (this.head) {
       this.head = this.head.next;
-      this.head.prev = null
-      }
+      this.head.prev = null;
     }
+  }
 
   removeLast() {
     if (this.tail) {
@@ -93,17 +100,66 @@ export default class DoublyLinkedList {
     return node;
   }
 
-  addNodeLast(node) {}
+  addNodeLast(node) {
+    if (!this.tail) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      this.tail.next = node;
+      node.prev = this.tail;
+      this.tail = node;
+    }
+  }
 
-  addNodeFirst(node) {}
+  addNodeFirst(node) {
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      node.next = this.head;
+      this.head.prev = node;
+      this.head = node;
+    }
+  }
 
-  insertAfterNode(node, after) {}
+  insertAfterNode(node, after) {
+    node.prev = after;
+    node.next = after.next;
+    if (after.next) {
+      after.next.prev = node;
+    } else {
+      this.tail = node;
+    }
+    after.next = node;
+  }
 
-  insertBeforeNode(node, before) {}
+  insertBeforeNode(node, before) {
+    node.next = before;
+    node.prev = before.prev;
+    if (before.prev) {
+      before.prev.next = node;
+    } else {
+      this.head = node;
+    }
+    before.prev = node;
+  }
 
-  removeNode(node) {}
+  removeNode(node) {
+    if (node.prev) {
+      node.prev.next = node.next;
+    } else {
+      this.head = node.next;
+    }
+    if (node.next) {
+      node.next.prev = node.prev;
+    } else {
+      this.tail = node.prev;
+    }
+  }
 
-  nodeAt(index) {}
+  nodeAt(index) {
+    return this.getNode(index);
+  }
 
   swapNodes(node1, node2) {}
 
@@ -130,9 +186,13 @@ export default class DoublyLinkedList {
     }
   }
 
-  getNextNode(node) {}
+  getNextNode(node) {
+    return node.next;
+  }
 
-  getPreviousNode(node) {}
+  getPreviousNode(node) {
+    return node.prev;
+  }
 }
 
 export class Node {
