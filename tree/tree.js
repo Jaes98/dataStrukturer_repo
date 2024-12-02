@@ -1,4 +1,4 @@
-class Node {
+export class Node {
   constructor(value) {
     this.value = value;
     this.parent = null;
@@ -44,7 +44,7 @@ class Node {
   }
 }
 
-export default class Tree {
+export class Tree {
   constructor(value) {
     this.root = value ? new Node(value) : null;
   }

@@ -1,4 +1,4 @@
-import Tree from "./tree.js";
+import {Tree, Node} from "./tree.js";
 
 function testTree() {
   const tree = new Tree();
@@ -38,17 +38,17 @@ function testTree() {
   );
 
   // Replacing child nodes
-//   const newNode = new Node(6);
-//   tree.root.replaceChild(newNode, tree.root.childNodes[0]);
-//   console.log(
-//     "First child value should be replaced with 6:",
-//     tree.root.childNodes[0].value === 6
-//   );
+  const newNode = new Node(6);
+  tree.root.replaceChild(newNode, tree.root.childNodes[0]);
+  console.log(
+    "First child value should be replaced with 6:",
+    tree.root.childNodes[0].value === 6
+  );
 
-//   console.log(
-//     "Node with value 2 should be removed after replacement:",
-//     tree.findValue(2) === null
-//   );
+  console.log(
+    "Node with value 2 should be removed after replacement:",
+    tree.findValue(2) === null
+  );
 }
 
 testTree();
