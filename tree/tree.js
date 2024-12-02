@@ -44,7 +44,7 @@ class Node {
   }
 }
 
-class Tree {
+export default class Tree {
   constructor(value) {
     this.root = value ? new Node(value) : null;
   }
@@ -116,5 +116,3 @@ class Tree {
     }
   }
 }
-
-module.exports = { Tree, Node };
